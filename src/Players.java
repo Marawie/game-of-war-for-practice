@@ -34,7 +34,7 @@ public class Players {
     }
 
     public void removeCardFromPlayer(Card card) {
-        cards.remove(card);
+     cards.remove(card);
     }
 
     public void addCardToPlayer(Card card) {
@@ -42,6 +42,9 @@ public class Players {
     }
 
     public void howManyPlayers() {
+      try {
+          System.out.println("Welcome to card game names of War Game!");
+
         Players player;
         Deck deck = new Deck();
         deck.createDeck();
@@ -50,6 +53,7 @@ public class Players {
         System.out.println("How many players you would like to play?");
         System.out.println("Max - 5, Min - 2!");
         int choice = scanner.nextInt();
+
         if (choice >= 2 && choice <= 5) {
             for (int i = 0; i < choice; i++) {
                 System.out.println("Set name of player");
@@ -72,6 +76,12 @@ public class Players {
             System.out.println("So game started with: " + "\n" + getPlayerList());
         } else
             System.out.println("I said you, there has to be at least 2 or maxiumum 5 players!");
-    }
-}
+    }catch (InputMismatchException e){
+          System.out.println("You input string, only numbers accpeted");
+      }
+      catch (Exception e){
+          System.out.println("Something went wrong! :( ");
+      }
 
+}
+}
