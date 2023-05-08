@@ -30,11 +30,14 @@ public class Players {
     }
 
     public String toString() {
-        return "Player: " + this.name + " has these cards: " + this.cards + "\n";
+        return "Player: " + this.getName() + " has these cards: " + this.cards + "\n";
     }
 
     public void removeCardFromPlayer(Card card) {
      cards.remove(card);
+    }
+    public String getName() {
+        return name;
     }
 
     public void addCardToPlayer(Card card) {
@@ -84,4 +87,6 @@ public class Players {
       }
 
 }
+
+
 }
