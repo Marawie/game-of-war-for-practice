@@ -67,7 +67,7 @@ public class Players {
                 int howManyCardsShouldPlayerHave = deck.getDeck().size() / choice;
             for (int x = 0; x < deck.getDeck().size(); x++) {
                 for (int j = 0; j < playerList.size(); j++) {
-                    if (playerList.get(j).cards.size() < howManyCardsShouldPlayerHave) {
+                    if (playerList.get(j).cards.size() <= howManyCardsShouldPlayerHave) {
                         Card card = deck.draw();
                         playerList.get(j).cards.add(card);
                     }
