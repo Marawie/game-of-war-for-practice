@@ -1,3 +1,5 @@
+package game.java;
+
 public class Card {
     private String rank;
     private int value;

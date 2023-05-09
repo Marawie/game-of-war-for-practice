@@ -1,3 +1,5 @@
+package game.java;
+
 import java.util.*;
 
 public class Deck {
