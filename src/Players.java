@@ -54,10 +54,10 @@ public class Players {
         deck.shuffleDeck();
         System.out.println("We are starting the game!");
         System.out.println("How many players you would like to play?");
-        System.out.println("Max - 5, Min - 2!");
+        System.out.println("Max - 4, Min - 2!");
         int choice = scanner.nextInt();
 
-        if (choice >= 2 && choice <= 5) {
+        if (choice >= 2 && choice <= 4) {
             for (int i = 0; i < choice; i++) {
                 System.out.println("Set name of player");
                 String names = scanner.next();
@@ -78,9 +78,10 @@ public class Players {
             System.out.println("Now Dealer add cards to your hand!");
             System.out.println("So game started with: " + "\n" + getPlayerList());
         } else
-            System.out.println("I said you, there has to be at least 2 or maxiumum 5 players!");
+            System.out.println("I said you, there has to be at least 2 or maximum 4 players!");
     }catch (InputMismatchException e){
-          System.out.println("You input string, only numbers accpeted");
+          System.out.println("You input string, only numbers accepted");
+          System.exit(1);
       }
       catch (Exception e){
           System.out.println("Something went wrong! :( ");

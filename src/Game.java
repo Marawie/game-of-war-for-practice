@@ -1,45 +1,37 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Game {
 
     Scanner scanner = new Scanner(System.in);
+    Players players;
 
     public void warGame() {
         Players players = new Players();
         int numbOfRound = 1;
         players.howManyPlayers();
+        Card card;
+        List<Card> playedCardInRound = new ArrayList<>();
 
-
-    try {
         do {
-            System.out.println("It's round number:" + numbOfRound);
-            List<Card> cardsInPlay = new ArrayList<>();
-            for (int i = 0; i < players.getPlayerList().size(); i++) {
-                Card card = players.playerList.get(i).getCards().get(0);
-                System.out.println("Player " + players.getName() + " played: " + card);
-                cardsInPlay.add(card);
-            }
-            int highestValue = cardsInPlay.get(0).getValue();
-            int highestValueIndex = 0;
-            for (int i = 1; i < cardsInPlay.size(); i++) {
-                if (cardsInPlay.get(i).getValue() > highestValue) {
-                    highestValue = cardsInPlay.get(i).getValue();
-                    highestValueIndex = i;
-                }
-            }
-            System.out.println("Player " + (highestValueIndex+1) + " won the round!");
-            for (int i = 0; i < cardsInPlay.size(); i++) {
-                players.playerList.get(highestValueIndex).addCardToPlayer(cardsInPlay.get(i));
-            }
-            numbOfRound++;
-        } while (doYouWantToPlayMore() == true);
+            System.out.println("We are starting round number: \n" + "       ***** " + numbOfRound + " ***** ");
 
-    }catch (IndexOutOfBoundsException e){
-        System.out.println("Not that type which was expected!");
-    }
+            for (int i = 0; i < players.getPlayerList().size(); i++) {
+                Players playersName = players.getPlayerList().get(i);
+                card = players.getPlayerList().get(i).getCards().get(0);
+                players.getPlayerList().get(i).removeCardFromPlayer(card);
+                playedCardInRound.add(card);
+
+                System.out.println("Player " + playersName.getName() + " played " + card);
+
+            }
+            System.out.println("\n Card played this round: \n");
+            System.out.println(playedCardInRound);
+            playedCardInRound.clear();
+            numbOfRound++;
+        }
+        while (doYouWantToPlayMore());
+
     }
 
     public boolean doYouWantToPlayMore() {
@@ -49,8 +41,11 @@ public class Game {
             return true;
         }
         return false;
+
     }
 }
+
+
 
 
 
