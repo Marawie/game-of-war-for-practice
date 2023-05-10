@@ -18,7 +18,7 @@ public class Game {
 
     //maybe should create map with <key Players and value getValue card?
         do {
-            Card winningCard = players.getPlayerList().get(0).getCards().get(0); //1
+            Card winningCard = players.getPlayerList().get(0).getCards().get(0);
             System.out.println("We are starting round number: \n" + "       ***** " + numbOfRound + " ***** ");
             System.out.println("This is actually hand from players " + players.getPlayerList());
 
@@ -50,16 +50,18 @@ public class Game {
                 System.out.println("There is more than one player with the winning card, so I will choose one at random.");
                 Players winner = playersWithWinningCard.get(random.nextInt(playersWithWinningCard.size()));
                 System.out.println("There is a winner! " + winner.getName());
-                for (int j = 0; j < playedCardInRound.size(); j++) {
-                    winner.addCardToPlayer(playedCardInRound.get(j));
+                for (Card card : playedCardInRound) {
+                    winner.addCardToPlayer(card);
                 }
             } else {
                 Players winner = playersWithWinningCard.get(0);
                 System.out.println("There is a winner! " + winner.getName());
-                for (int j = 0; j < playedCardInRound.size(); j++) {
-                    winner.addCardToPlayer(playedCardInRound.get(j));
+                for (Card card : playedCardInRound) {
+                    winner.addCardToPlayer(card);
                 }
             }
+
+
 
 //There is an issue if first player has higher value then block if else is good but if second player wins then nothing happend
 
@@ -77,10 +79,7 @@ public class Game {
     public boolean doYouWantToPlayMore() {
         System.out.println("Do you want to play more? Y/N");
         String choice = scanner.next().toUpperCase();
-        if (choice.equals("Y")) {
-            return true;
-        }
-        return false;
+        return choice.equals("Y");
 
     }
 }
