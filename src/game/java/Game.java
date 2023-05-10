@@ -13,40 +13,55 @@ public class Game {
         players.howManyPlayers();
         List<Card> playedCardInRound = new ArrayList<>();
         List<Players> playersWithWinningCard = new ArrayList<>();
+        boolean anyCardHigher = false;
 
 
     //maybe should create map with <key Players and value getValue card?
         do {
-            Card winningCard = players.getPlayerList().get(1).getCards().get(0);
+            Card winningCard = players.getPlayerList().get(0).getCards().get(0); //1
             System.out.println("We are starting round number: \n" + "       ***** " + numbOfRound + " ***** ");
             System.out.println("This is actually hand from players " + players.getPlayerList());
 
             for (int i = 0; i < players.getPlayerList().size(); i++) {
-                Players playersName = players.getPlayerList().get(i);
-                Card card = players.getPlayerList().get(i).getCards().get(0);
-                players.getPlayerList().get(i).removeCardFromPlayer(card);
+                Players player = players.getPlayerList().get(i);
+                Card card = player.getCards().get(0);
+                player.removeCardFromPlayer(card);
                 playedCardInRound.add(card);
 
-                System.out.println("Player " + playersName.getName() + " played " + card);
+                System.out.println("Player " + player.getName() + " played " + card);
+
                 if (card.getValue() > winningCard.getValue()){
                     winningCard = card;
-                    playersWithWinningCard.add(players.getPlayerList().get(i));
-                    System.out.println("The winning card is: " + winningCard);
-
+                    playersWithWinningCard.clear();
+                    playersWithWinningCard.add(player);
+                    anyCardHigher = true;
                 } else if (card.getValue() == winningCard.getValue()) {
-                    playersWithWinningCard.add(players.getPlayerList().get(i));
-
-                }if (playersWithWinningCard.size() > 1){
-                    Random random = new Random();
-                    System.out.println("There is more than one players with winning card so i would random, get card to 1 player");
-                    Players winner = playersWithWinningCard.get(random.nextInt(playersWithWinningCard.size()));
-                    System.out.println("There is a winner!" + winner.getName());
-                    for (int j = 0; j<playedCardInRound.size(); j++){
-                        winner.addCardToPlayer(playedCardInRound.get(i));
-                    }
+                    playersWithWinningCard.add(player);
                 }
             }
-//There is a issue if first player has higher value then block if else is good but if second player wins then nothing happend
+
+            if (!anyCardHigher) {
+                playersWithWinningCard.clear();
+                playersWithWinningCard.addAll(players.getPlayerList());
+            }
+
+            if (playersWithWinningCard.size() > 1){
+                Random random = new Random();
+                System.out.println("There is more than one player with the winning card, so I will choose one at random.");
+                Players winner = playersWithWinningCard.get(random.nextInt(playersWithWinningCard.size()));
+                System.out.println("There is a winner! " + winner.getName());
+                for (int j = 0; j < playedCardInRound.size(); j++) {
+                    winner.addCardToPlayer(playedCardInRound.get(j));
+                }
+            } else {
+                Players winner = playersWithWinningCard.get(0);
+                System.out.println("There is a winner! " + winner.getName());
+                for (int j = 0; j < playedCardInRound.size(); j++) {
+                    winner.addCardToPlayer(playedCardInRound.get(j));
+                }
+            }
+
+//There is an issue if first player has higher value then block if else is good but if second player wins then nothing happend
 
 
             System.out.println("\n Card played this round: \n");
